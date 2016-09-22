@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Pump list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Serial No</th>
+                <th>Name</th>
+                <th>Reset Value</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pump in pumps %}
+            <tr>
+                <td>{{ pump.id }}</td>
+                <td><a href="{{ path('pump_show', { 'id': pump.id }) }}">{{ pump.serialNo }}</a></td>
+                <td>{{ pump.name }}</td>
+                <td>{{ pump.resetValue }}</td>
+                <td>{% if pump.status %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('pump_show', { 'id': pump.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('pump_edit', { 'id': pump.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('pump_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

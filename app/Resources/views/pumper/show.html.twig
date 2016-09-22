@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Pumper</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ pumper.name }}</td>
+            </tr>
+            <tr>
+                <th>Contact No</th>
+                <td>{{ pumper.contactNo }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ pumper.address }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{% if pumper.status %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ pumper.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('pumper_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('pumper_edit', { 'id': pumper.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

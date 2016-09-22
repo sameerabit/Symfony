@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>InvtUom list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Code</th>
+                <th>Deletedat</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for invtUom in invtUoms %}
+            <tr>
+                <td><a href="{{ path('invtuom_show', { 'id': invtUom.id }) }}">{{ invtUom.description }}</a></td>
+                <td>{{ invtUom.code }}</td>
+                <td>{{ invtUom.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('invtuom_show', { 'id': invtUom.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('invtuom_edit', { 'id': invtUom.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('invtuom_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

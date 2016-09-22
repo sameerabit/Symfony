@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Account</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ account.name }}</td>
+            </tr>
+            <tr>
+                <th>Regno</th>
+                <td>{{ account.regNo }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ account.description }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{% if account.status %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ account.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('account_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('account_edit', { 'id': account.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

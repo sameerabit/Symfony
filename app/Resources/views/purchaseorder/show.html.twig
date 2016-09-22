@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>PurchaseOrder</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Placeat</th>
+                <td>{% if purchaseOrder.placeAt %}{{ purchaseOrder.placeAt|date('H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if purchaseOrder.createdAt %}{{ purchaseOrder.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{% if purchaseOrder.updatedAt %}{{ purchaseOrder.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Deletedat</th>
+                <td>{% if purchaseOrder.deletedAt %}{{ purchaseOrder.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{% if purchaseOrder.status %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Isgrn</th>
+                <td>{% if purchaseOrder.isGrn %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ purchaseOrder.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('purchaseorder_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('purchaseorder_edit', { 'id': purchaseOrder.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

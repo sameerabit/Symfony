@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>InvtUomConversion list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Factor</th>
+                <th>Id</th>
+                <th>Lower UOM</th>
+                <th>UOM</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for invtUomConversion in invtUomConversions %}
+            <tr>
+                <td><a href="{{ path('invtuomconversion_show', { 'id': invtUomConversion.id }) }}">{{ invtUomConversion.factor }}</a></td>
+                <td>{{ invtUomConversion.id }}</td>
+                <td>{{ invtUomConversion.lowerUom.description }}</td>
+                <td>{{ invtUomConversion.uom.description }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('invtuomconversion_show', { 'id': invtUomConversion.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('invtuomconversion_edit', { 'id': invtUomConversion.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('invtuomconversion_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

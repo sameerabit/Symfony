@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>InvtProductLine list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Producttype</th>
+                <th>Valuation</th>
+                <th>Allowbackorders</th>
+                <th>Allowtradediscount</th>
+                <th>Isiteminactive</th>
+                <th>Commisionmethod</th>
+                <th>Commisionrate</th>
+                <th>Basecommision</th>
+                <th>Rogcotincres</th>
+                <th>Purchasetaxclass</th>
+                <th>Salestaxclass</th>
+                <th>Warrantycode</th>
+                <th>Productlinecol</th>
+                <th>Allowreturns</th>
+                <th>Deletedat</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for invtProductLine in invtProductLines %}
+            <tr>
+                <td><a href="{{ path('invtproductline_show', { 'id': invtProductLine.id }) }}">{{ invtProductLine.description }}</a></td>
+                <td>{{ invtProductLine.productType }}</td>
+                <td>{{ invtProductLine.valuation }}</td>
+                <td>{% if invtProductLine.allowBackOrders %}Yes{% else %}No{% endif %}</td>
+                <td>{% if invtProductLine.allowTradeDiscount %}Yes{% else %}No{% endif %}</td>
+                <td>{% if invtProductLine.isItemInactive %}Yes{% else %}No{% endif %}</td>
+                <td>{{ invtProductLine.commisionMethod }}</td>
+                <td>{{ invtProductLine.commisionRate }}</td>
+                <td>{{ invtProductLine.baseCommision }}</td>
+                <td>{% if invtProductLine.rogCotIncres %}Yes{% else %}No{% endif %}</td>
+                <td>{{ invtProductLine.purchaseTaxClass }}</td>
+                <td>{{ invtProductLine.salesTaxClass }}</td>
+                <td>{{ invtProductLine.warrantyCode }}</td>
+                <td>{{ invtProductLine.productLinecol }}</td>
+                <td>{% if invtProductLine.allowReturns %}Yes{% else %}No{% endif %}</td>
+                <td>{% if invtProductLine.deletedat %}{{ invtProductLine.deletedat|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ invtProductLine.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('invtproductline_show', { 'id': invtProductLine.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('invtproductline_edit', { 'id': invtProductLine.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('invtproductline_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

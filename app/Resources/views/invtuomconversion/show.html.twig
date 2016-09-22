@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>InvtUomConversion</h1>
+
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th>Factor</th>
+                <td>{{ invtUomConversion.factor }}</td>
+            </tr>
+            <tr>
+                <th>UOM</th>
+                <td>{{ invtUomConversion.uom.description }}</td>
+            </tr>
+            <tr>
+                <th>Lower UOM</th>
+                <td>{{ invtUomConversion.lowerUom.description }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ invtUomConversion.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('invtuomconversion_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('invtuomconversion_edit', { 'id': invtUomConversion.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

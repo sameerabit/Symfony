@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>InvtItemCat</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ invtItemCat.name }}</td>
+            </tr>
+            <tr>
+                <th>Desc</th>
+                <td>{{ invtItemCat.description }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{% if invtItemCat.status %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ invtItemCat.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('invtitemcat_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('invtitemcat_edit', { 'id': invtItemCat.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

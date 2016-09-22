@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>InvtWarehouses list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Desc</th>
+                <th>Zipcode</th>
+                <th>City</th>
+                <th>Country</th>
+                <th>Posttolocation</th>
+                <th>Deletedat</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for invtWarehouse in invtWarehouses %}
+            <tr>
+                <td><a href="{{ path('invtwarehouses_show', { 'id': invtWarehouse.id }) }}">{{ invtWarehouse.code }}</a></td>
+                <td>{{ invtWarehouse.name }}</td>
+                <td>{{ invtWarehouse.desc }}</td>
+                <td>{{ invtWarehouse.zipcode }}</td>
+                <td>{{ invtWarehouse.city }}</td>
+                <td>{{ invtWarehouse.country }}</td>
+                <td>{{ invtWarehouse.postToLocation }}</td>
+                <td>{% if invtWarehouse.deletedat %}{{ invtWarehouse.deletedat|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ invtWarehouse.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('invtwarehouses_show', { 'id': invtWarehouse.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('invtwarehouses_edit', { 'id': invtWarehouse.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('invtwarehouses_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

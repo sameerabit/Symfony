@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>InvtItemCat list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for invtItemCat in invtItemCats %}
+            <tr>
+                <td><a href="{{ path('invtitemcat_show', { 'id': invtItemCat.id }) }}">{{ invtItemCat.name }}</a></td>
+                <td>{{ invtItemCat.description }}</td>
+                <td>{% if invtItemCat.status %}Yes{% else %}No{% endif %}</td>
+                <td>{{ invtItemCat.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('invtitemcat_show', { 'id': invtItemCat.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('invtitemcat_edit', { 'id': invtItemCat.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('invtitemcat_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

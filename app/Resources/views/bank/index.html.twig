@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Bank list</h1>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Accno</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for bank in banks %}
+            <tr>
+                <td><a href="{{ path('bank_show', { 'id': bank.id }) }}">{{ bank.name }}</a></td>
+                <td>{% if bank.status %}Yes{% else %}No{% endif %}</td>
+                <td>{{ bank.accno }}</td>
+                <td>{{ bank.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('bank_show', { 'id': bank.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('bank_edit', { 'id': bank.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('bank_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

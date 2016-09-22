@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Pumper list</h1>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Contact No</th>
+                <th>Address</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pumper in pumpers %}
+            <tr>
+                <td>{{ pumper.id }}</td>
+                <td><a href="{{ path('pumper_show', { 'id': pumper.id }) }}">{{ pumper.name }}</a></td>
+                <td>{{ pumper.contactNo }}</td>
+                <td>{{ pumper.address }}</td>
+                <td>{% if pumper.status %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('pumper_show', { 'id': pumper.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('pumper_edit', { 'id': pumper.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('pumper_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

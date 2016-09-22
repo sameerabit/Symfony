@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Item list</h1>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Code</th>
+                <th>Desc</th>
+                <th>Standard Price</th>
+                <th>Retail Price</th>
+                <th>Reorder Point</th>
+                <th>Reorder Quantity</th>
+                <th>UOM Purchase</th>
+                <th>UOM standard</th>
+                <th>UOM Sales</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for invtItem in invtItems %}
+            <tr>
+                <td>{{ invtItem.id }}</td>
+                <td><a href="{{ path('invtitem_show', { 'id': invtItem.id }) }}">{{ invtItem.code }}</a></td>
+                <td>{{ invtItem.description }}</td>
+                <td>{{ invtItem.standerdPrice }}</td>
+                <td>{{ invtItem.retailPrice }}</td>
+                <td>{{ invtItem.reorderPoint }}</td>
+                <td>{{ invtItem.reorderQuantity }}</td>
+                <td><a href="{{ path('invtuom_show', { 'id': invtItem.uomSale.id }) }}">{{ invtItem.uomSale.description }}</a></td>
+                <td><a href="{{ path('invtuom_show', { 'id': invtItem.uomSale.id }) }}">{{ invtItem.uomStanderd.description }}</a></td>
+                <td><a href="{{ path('invtuom_show', { 'id': invtItem.uomSale.id }) }}">{{ invtItem.uomPurchase.description }}</a></td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('invtitem_show', { 'id': invtItem.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('invtitem_edit', { 'id': invtItem.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('invtitem_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}
