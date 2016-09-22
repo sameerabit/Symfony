@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\InvtCountDetail" table="invt_count_detail">
+    <indexes>
+      <index name="fk_invt_count_detail_1_idx" columns="id_count"/>
+      <index name="fk_invt_count_detail_2_idx" columns="id_batch"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="qty" type="integer" column="qty" nullable="true">
+      <options>
+        <option name="unsigned">1</option>
+      </options>
+    </field>
+    <many-to-one field="idCount" target-entity="InvtCounts" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_count" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idBatch" target-entity="InvtItemBatch" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_batch" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

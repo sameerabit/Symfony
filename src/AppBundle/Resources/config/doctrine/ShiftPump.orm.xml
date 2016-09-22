@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\ShiftPump" table="shift_pump">
+    <indexes>
+      <index name="fk_shift_pump_shift1_idx" columns="shift_id"/>
+      <index name="fk_shift_pump_pump1_idx" columns="pump_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="shiftOnReading" type="decimal" column="shift_on_reading" precision="18" scale="4" nullable="true"/>
+    <field name="shiftOffReading" type="decimal" column="shift_off_reading" precision="18" scale="4" nullable="true">
+      <options>
+        <option name="comment">when calculating the sale consider the pump's max credit limit</option>
+        <option name="default">0.0000</option>
+      </options>
+    </field>
+    <field name="status" type="boolean" column="status" nullable="true">
+      <options>
+        <option name="comment">0- deactive,1-active</option>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <field name="createdAt" type="datetime" column="created_at" nullable="true"/>
+    <field name="updatedAt" type="datetime" column="updated_at" nullable="true"/>
+    <field name="deletedAt" type="datetime" column="deleted_at" nullable="true"/>
+    <field name="commenceTime" type="datetime" column="commence_time" nullable="false"/>
+    <field name="endTime" type="datetime" column="end_time" nullable="false"/>
+    <many-to-one field="pump" target-entity="Pump" fetch="LAZY">
+      <join-columns>
+        <join-column name="pump_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="shift" target-entity="Shift" fetch="LAZY">
+      <join-columns>
+        <join-column name="shift_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

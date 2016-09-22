@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\InvtProductLineGlCodes" table="invt_product_line_gl_codes">
+    <indexes>
+      <index name="fk_invt_product_line_has_gl_normal__accounts_gl_normal__acc_idx" columns="gl_normal_account"/>
+      <index name="fk_invt_product_line_has_gl_normal__accounts_invt_product_l_idx" columns="product_line"/>
+      <index name="fk_invt_product_line_gl_codes_invt_product_line_gl_config1_idx" columns="product_line_gl_config_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="productLineGlConfig" target-entity="InvtProductLineGlConfig" fetch="LAZY">
+      <join-columns>
+        <join-column name="product_line_gl_config_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="glNormalAccount" target-entity="InvtGlNormalAccounts" fetch="LAZY">
+      <join-columns>
+        <join-column name="gl_normal_account" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="productLine" target-entity="InvtProductLine" fetch="LAZY">
+      <join-columns>
+        <join-column name="product_line" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

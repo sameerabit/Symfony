@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\IssuedLooseFuel" table="issued_loose_fuel">
+    <indexes>
+      <index name="fk_issued_loose_fuel_shift1_idx" columns="shift_id"/>
+      <index name="fk_issued_loose_fuel_invt_item1_idx" columns="id_item"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="amount" type="decimal" column="amount" precision="10" scale="0" nullable="true"/>
+    <field name="deletedAt" type="datetime" column="deleted_at" nullable="true"/>
+    <field name="updatedAt" type="datetime" column="updated_at" nullable="true"/>
+    <field name="createdAt" type="datetime" column="created_at" nullable="true"/>
+    <many-to-one field="idItem" target-entity="InvtItem" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_item" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="shift" target-entity="Shift" fetch="LAZY">
+      <join-columns>
+        <join-column name="shift_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

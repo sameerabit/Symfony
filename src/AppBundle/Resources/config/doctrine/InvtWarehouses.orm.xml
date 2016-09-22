@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\InvtWarehouses" table="invt_warehouses">
+    <indexes>
+      <index name="fk_warehouses_warehouses_idx" columns="default_warehouse"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="warehousescol_UNIQUE" columns="code"/>
+      <unique-constraint name="name_UNIQUE" columns="name"/>
+      <unique-constraint name="desc_UNIQUE" columns="desc"/>
+    </unique-constraints>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="code" type="string" column="code" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="name" type="string" column="name" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="desc" type="string" column="desc" length="200" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="zipcode" type="string" column="zipcode" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="city" type="string" column="city" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="country" type="string" column="country" length="10" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="postToLocation" type="string" column="post_to_location" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="deletedat" type="datetime" column="deletedAt" nullable="true"/>
+    <many-to-one field="defaultWarehouse" target-entity="InvtWarehouses" fetch="LAZY">
+      <join-columns>
+        <join-column name="default_warehouse" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

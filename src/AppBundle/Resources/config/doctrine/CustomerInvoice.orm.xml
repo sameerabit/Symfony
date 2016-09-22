@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CustomerInvoice" table="customer_invoice">
+    <indexes>
+      <index name="fk_customer_invoice_company1_idx" columns="company_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="invoiceId" type="string" column="invoice_id" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="amount" type="string" column="amount" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="invDate" type="date" column="inv_date" nullable="true"/>
+    <field name="isPaid" type="boolean" column="is_paid" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="lastInvoiceDate" type="datetime" column="last_invoice_date" nullable="true"/>
+    <many-to-one field="company" target-entity="Company" fetch="LAZY">
+      <join-columns>
+        <join-column name="company_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

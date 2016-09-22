@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Pump" table="pump">
+    <indexes>
+      <index name="fk_pump_invt_item1_idx" columns="id_item"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="serialNo" type="string" column="serial_no" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="name" type="string" column="name" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="meterType" type="string" column="meter_type" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="resetValue" type="float" column="reset_value" precision="10" scale="0" nullable="true"/>
+    <field name="status" type="boolean" column="status" nullable="false"/>
+    <field name="updatedAt" type="datetime" column="updated_at" nullable="true"/>
+    <field name="createdAt" type="datetime" column="created_at" nullable="true"/>
+    <field name="deletedAt" type="datetime" column="deleted_at" nullable="true"/>
+    <many-to-one field="idItem" target-entity="InvtItem" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_item" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

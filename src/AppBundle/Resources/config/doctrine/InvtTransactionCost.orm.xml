@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\InvtTransactionCost" table="invt_transaction_cost">
+    <indexes>
+      <index name="fk_invt_transaction_cost_1_idx" columns="id_transaction_entry"/>
+      <index name="fk_invt_transaction_cost_2_idx" columns="id_item"/>
+      <index name="fk_invt_transaction_cost_3_idx" columns="id_batch"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="idItem" type="integer" column="id_item" nullable="false">
+      <options>
+        <option name="unsigned">1</option>
+      </options>
+    </field>
+    <field name="type" type="string" column="type" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cost" type="float" column="cost" precision="10" scale="0" nullable="true"/>
+    <field name="qty" type="integer" column="qty" nullable="true">
+      <options>
+        <option name="unsigned">1</option>
+      </options>
+    </field>
+    <many-to-one field="idTransactionEntry" target-entity="InvtTransactionEntry" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_transaction_entry" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idBatch" target-entity="InvtItemBatch" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_batch" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

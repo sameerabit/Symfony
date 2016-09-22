@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Cheque" table="cheque">
+    <indexes>
+      <index name="fk_creditor_cheque_bank1_idx" columns="bank_id"/>
+      <index name="fk_cheque_payment_type1_idx" columns="payment_detail_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="realizeDate" type="date" column="realize_date" nullable="true"/>
+    <field name="bankAcc" type="string" column="bank_acc" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="amount" type="decimal" column="amount" precision="10" scale="2" nullable="true"/>
+    <field name="createdAt" type="datetime" column="created_at" nullable="true"/>
+    <field name="deletedAt" type="datetime" column="deleted_at" nullable="true"/>
+    <field name="updatedAt" type="datetime" column="updated_at" nullable="true"/>
+    <field name="returnstatus" type="boolean" column="returnStatus" nullable="true"/>
+    <many-to-one field="paymentDetail" target-entity="PaymentDetail" fetch="LAZY">
+      <join-columns>
+        <join-column name="payment_detail_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="bank" target-entity="Bank" fetch="LAZY">
+      <join-columns>
+        <join-column name="bank_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

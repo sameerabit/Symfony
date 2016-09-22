@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Discount" table="discount">
+    <indexes>
+      <index name="fk_item_discounts_invt_item_idx" columns="invt_item_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="sellingQty" type="decimal" column="selling_qty" precision="10" scale="2" nullable="true"/>
+    <field name="sellingFreeQty" type="decimal" column="selling_free_qty" precision="10" scale="2" nullable="true"/>
+    <field name="buyingQty" type="decimal" column="buying_qty" precision="10" scale="2" nullable="true"/>
+    <field name="buyingFreeQty" type="decimal" column="buying_free_qty" precision="10" scale="2" nullable="true"/>
+    <field name="deletedAt" type="datetime" column="deleted_at" nullable="true"/>
+    <many-to-one field="invtItem" target-entity="InvtItem" fetch="LAZY">
+      <join-columns>
+        <join-column name="invt_item_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

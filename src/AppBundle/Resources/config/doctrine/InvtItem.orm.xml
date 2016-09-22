@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\InvtItem" table="invt_item">
+    <indexes>
+      <index name="fk_invt_item_invt_product_line1_idx" columns="invt_product_line"/>
+      <index name="fk_invt_item_invt_price_code1_idx" columns="price_code"/>
+      <index name="fk_invt_item_invt_item_cat1_idx" columns="item_cat_id"/>
+      <index name="uom_standerd" columns="uom_standerd"/>
+      <index name="uom_sale" columns="uom_sale"/>
+      <index name="uom_purchase" columns="uom_purchase"/>
+      <index name="uom_sale_2" columns="uom_sale"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="code" type="string" column="code" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="description" type="string" column="description" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="valuation" type="string" column="valuation" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="default">FIFO</option>
+      </options>
+    </field>
+    <field name="weight" type="float" column="weight" precision="10" scale="0" nullable="true"/>
+    <field name="volume" type="float" column="volume" precision="10" scale="0" nullable="true"/>
+    <field name="standerdPrice" type="float" column="standerd_price" precision="10" scale="2" nullable="false"/>
+    <field name="retailPrice" type="float" column="retail_price" precision="10" scale="2" nullable="false"/>
+    <field name="productType" type="string" column="product_type" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">1 - Finished goods
+2- Row material
+3 - Kit
+4 - Discontinoued</option>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <field name="sku" type="string" column="sku" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Stock keeping unit
+
+to be confirmed</option>
+      </options>
+    </field>
+    <field name="deletedat" type="datetime" column="deletedAt" nullable="true"/>
+    <field name="reorderPoint" type="integer" column="reorder_point" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="reorderQuantity" type="integer" column="reorder_quantity" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="cat1" type="string" column="cat1" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cat2" type="string" column="cat2" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cat3" type="string" column="cat3" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cat4" type="string" column="cat4" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="itemCat" target-entity="InvtItemCat" fetch="LAZY">
+      <join-columns>
+        <join-column name="item_cat_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="priceCode" target-entity="InvtPriceCode" fetch="LAZY">
+      <join-columns>
+        <join-column name="price_code" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="invtProductLine" target-entity="InvtProductLine" fetch="LAZY">
+      <join-columns>
+        <join-column name="invt_product_line" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="uomSale" target-entity="InvtUom" fetch="LAZY">
+      <join-columns>
+        <join-column name="uom_sale" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="uomStanderd" target-entity="InvtUom" fetch="LAZY">
+      <join-columns>
+        <join-column name="uom_standerd" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="uomPurchase" target-entity="InvtUom" fetch="LAZY">
+      <join-columns>
+        <join-column name="uom_purchase" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

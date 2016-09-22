@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\ShiftSale" table="shift_sale">
+    <indexes>
+      <index name="fk_shift_sale_shift1_idx" columns="shift_id"/>
+      <index name="fk_shift_sale_sale1_idx" columns="sale_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="deletedAt" type="datetime" column="deleted_at" nullable="true"/>
+    <many-to-one field="sale" target-entity="Sale" fetch="LAZY">
+      <join-columns>
+        <join-column name="sale_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="shift" target-entity="Shift" fetch="LAZY">
+      <join-columns>
+        <join-column name="shift_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\InvtProductLine" table="invt_product_line">
+    <indexes>
+      <index name="fk_product_line_uom1_idx" columns="uom_standerd"/>
+      <index name="fk_product_line_uom2_idx" columns="uom_sale"/>
+      <index name="fk_product_line_uom3_idx" columns="uom_purchase"/>
+      <index name="fk_product_line_price_code1_idx" columns="price_code"/>
+      <index name="fk_invt_product_line_invt_item_cat1_idx" columns="item_cat_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="description" type="string" column="description" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="productType" type="string" column="product_type" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">1 - Finish goods
+2 - Row material
+3 - Discontinoued
+4- kit</option>
+      </options>
+    </field>
+    <field name="valuation" type="string" column="valuation" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="allowBackOrders" type="boolean" column="allow_back_orders" nullable="false">
+      <options>
+        <option name="comment">&lt;&lt;allow_return&gt;&gt; fileld must enable only if this true</option>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <field name="allowTradeDiscount" type="boolean" column="allow_trade_discount" nullable="false">
+      <options>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <field name="isItemInactive" type="boolean" column="is_item_inactive" nullable="false">
+      <options>
+        <option name="comment">if &lt;&lt;true&gt;&gt; products added to this line will be always inactive</option>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="commisionMethod" type="string" column="commision_method" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">1 - None
+2 - Standerd
+3 - % of Cost
+4 - % of Price
+5 - % of Gross Profit</option>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <field name="commisionRate" type="float" column="commision_rate" precision="10" scale="3" nullable="true">
+      <options>
+        <option name="comment">%</option>
+        <option name="default">0.000</option>
+      </options>
+    </field>
+    <field name="baseCommision" type="float" column="base_commision" precision="10" scale="3" nullable="true">
+      <options>
+        <option name="comment">The total commission includes the total of the base commission and the commission rate amount</option>
+        <option name="default">0.000</option>
+      </options>
+    </field>
+    <field name="rogCotIncres" type="boolean" column="rog_cot_incres" nullable="true">
+      <options>
+        <option name="comment">Confirm Cost Increase in Receipt of Goods</option>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="purchaseTaxClass" type="integer" column="purchase_tax_class" nullable="true">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Purchases Tax Class</option>
+      </options>
+    </field>
+    <field name="salesTaxClass" type="integer" column="sales_tax_class" nullable="true">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Sales Tax Class</option>
+      </options>
+    </field>
+    <field name="warrantyCode" type="integer" column="warranty_code" nullable="true">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Warranty Code</option>
+      </options>
+    </field>
+    <field name="productLinecol" type="string" column="product_linecol" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="allowReturns" type="boolean" column="allow_returns" nullable="true">
+      <options>
+        <option name="comment">Allow Returns</option>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <field name="deletedat" type="datetime" column="deletedAt" nullable="true"/>
+    <many-to-one field="itemCat" target-entity="InvtItemCat" fetch="LAZY">
+      <join-columns>
+        <join-column name="item_cat_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="priceCode" target-entity="InvtPriceCode" fetch="LAZY">
+      <join-columns>
+        <join-column name="price_code" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="uomStanderd" target-entity="InvtUom" fetch="LAZY">
+      <join-columns>
+        <join-column name="uom_standerd" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="uomSale" target-entity="InvtUom" fetch="LAZY">
+      <join-columns>
+        <join-column name="uom_sale" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="uomPurchase" target-entity="InvtUom" fetch="LAZY">
+      <join-columns>
+        <join-column name="uom_purchase" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

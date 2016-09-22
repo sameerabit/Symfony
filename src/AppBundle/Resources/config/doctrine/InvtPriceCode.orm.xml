@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\InvtPriceCode" table="invt_price_code">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="code" type="string" column="code" length="20" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="desc" type="string" column="desc" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="pricingMethod" type="string" column="pricing_method" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">1- Cost Markup Amount
+2- Cost Markup %
+3- Price Discount Amount
+4- Price Discount %
+
+
+</option>
+      </options>
+    </field>
+    <field name="priceLevel" type="integer" column="price_level" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="deletedat" type="datetime" column="deletedAt" nullable="true"/>
+  </entity>
+</doctrine-mapping>

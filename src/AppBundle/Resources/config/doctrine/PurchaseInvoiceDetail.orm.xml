@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\PurchaseInvoiceDetail" table="purchase_invoice_detail">
+    <indexes>
+      <index name="fk_purchase_invoice_detail_purchase_invoice1_idx" columns="purchase_invoice_id"/>
+      <index name="fk_purchase_invoice_detail_invt_item1_idx" columns="id_item"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="orderedPrice" type="decimal" column="ordered_price" precision="10" scale="0" nullable="true"/>
+    <field name="orderedQty" type="decimal" column="ordered_qty" precision="10" scale="2" nullable="true"/>
+    <field name="deliveredQty" type="decimal" column="delivered_qty" precision="10" scale="2" nullable="true"/>
+    <field name="deliveredPrice" type="decimal" column="delivered_price" precision="10" scale="2" nullable="true"/>
+    <field name="qtyOnHand" type="decimal" column="qty_on_hand" precision="10" scale="2" nullable="true"/>
+    <field name="retailPrice" type="decimal" column="retail_price" precision="10" scale="2" nullable="true"/>
+    <many-to-one field="idItem" target-entity="InvtItem" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_item" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="purchaseInvoice" target-entity="PurchaseInvoice" fetch="LAZY">
+      <join-columns>
+        <join-column name="purchase_invoice_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
