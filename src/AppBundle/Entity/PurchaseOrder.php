@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\PurchaseInvoiceDetail;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,9 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class PurchaseOrder
 {
-
-
-
 
     /**
      * @var \DateTime
@@ -82,7 +78,7 @@ class PurchaseOrder
     /**
      * @var PurchaseOrderDetails
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PurchaseOrderDetails", mappedBy="purchaseOrdereaddada",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PurchaseOrderDetails", mappedBy="purchaseOrder",cascade={"persist"})
      */
     private $purchaseOrderDetails;
 
@@ -270,21 +266,6 @@ class PurchaseOrder
         return $this->supplier;
     }
 
-    /**
-     * @return PurchaseInvoiceDetail
-     */
-    public function getPurchaseOrderDetails()
-    {
-        return $this->purchaseOrderDetails;
-    }
-
-    /**
-     * @param PurchaseInvoiceDetail $purchaseOrderDetails
-     */
-    public function setPurchaseOrderDetails($purchaseOrderDetails)
-    {
-        $this->purchaseOrderDetails = $purchaseOrderDetails;
-    }
 
     public function addPurchaseOrderDetail(PurchaseOrderDetails $purchaseOrderDetails)
     {
@@ -294,5 +275,21 @@ class PurchaseOrder
     public function removeTag(PurchaseOrderDetails $purchaseOrderDetails)
     {
         // ...
+    }
+
+    /**
+     * @return PurchaseOrderDetails
+     */
+    public function getPurchaseOrderDetails()
+    {
+        return $this->purchaseOrderDetails;
+    }
+
+    /**
+     * @param PurchaseOrderDetails $purchaseOrderDetails
+     */
+    public function setPurchaseOrderDetails($purchaseOrderDetails)
+    {
+        $this->purchaseOrderDetails = $purchaseOrderDetails;
     }
 }

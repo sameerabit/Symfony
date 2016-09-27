@@ -51,15 +51,19 @@ class PurchaseOrderController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var PurchaseOrderDetails $detail */
-            foreach ($purchaseOrder->getPurchaseOrderDetails() as &$detail){
-                $itemId=$detail->getIdItem()->getId();
-                /** @var InvtItem $item */
-                $item=$em->find(InvtItem::class,$itemId);
-                $detail->setIdItem($item);
-                $detail->setPurchaseOrder($purchaseOrder);
-                $purchaseOrder->setPurchaseOrderDetails($detail);
-            }
+//            /** @var PurchaseOrderDetails $detail */
+//            foreach ($purchaseOrder->getPurchaseOrderDetails() as &$detail){
+//                $itemId=$detail->getIdItem()->getId();
+//                /** @var InvtItem $item */
+//                $item=$em->find(InvtItem::class,$itemId);
+//                $detail->setIdItem($item);
+//              //  $detail->setPurchaseOrder($purchaseOrder);
+//                $purchaseOrder->getPurchaseOrderDetails()->add($detail);
+//            }
+            $puchaseOrderDetail = new PurchaseOrderDetails();
+            $puchaseOrderDetail->setPrice(100);
+            $purchaseOrder->setPurchaseOrderDetails($puchaseOrderDetail);
+            $puchaseOrderDetail->setPurchaseOrder($purchaseOrder);
             $em->persist($purchaseOrder);
             $em->flush();
             return $this->redirectToRoute('purchaseorder_show', array('id' => $purchaseOrder->getId()));
